@@ -5,57 +5,60 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/03 12:41:25 by jwisozk           #+#    #+#             */
-/*   Updated: 2018/12/16 13:39:13 by jwisozk          ###   ########.fr       */
+/*   Created: 2019/05/12 19:23:00 by jwisozk           #+#    #+#             */
+/*   Updated: 2019/05/12 21:45:10 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int		ft_count(long n)
+static int     ft_get_len(long num)
 {
-	int len;
+    int len;
 
-	len = 1;
-	if (n < 0)
-		len = 2;
-	while ((n /= 10) != 0)
-		len++;
-	return (len);
+    len = 1;
+    if (num < 0)
+        len = 2;
+    while ((num /= 10) != 0)
+        len++;
+    return (len);
 }
 
-static	void	ft_putnbrs(long n, char *s)
+static void    ft_convert(char *str, long num)
 {
-	if (s != NULL)
-	{
-		if (n >= 10)
-		{
-			ft_putnbrs(n / 10, s);
-		}
-		s[ft_count(n) - 1] = n % 10 + '0';
-	}
+    if (num >= 10)
+        ft_convert(str - 1, num / 10);
+    if (*str != '-' )
+        *str = num % 10 + '0';
 }
 
-char			*ft_itoa(int n)
+static void    ft_fill_str(char *str, int len)
 {
-	int		len;
-	long	num;
-	char	*str;
-	int		i;
+    int i;
 
-	i = 0;
-	num = n;
-	len = ft_count(num);
-	str = (char*)malloc(sizeof(*str) * (len + 1));
-	if (!str)
-		return (NULL);
-	if (num < 0)
-	{
-		str[i] = '-';
-		num *= -1;
-		i = 1;
-	}
-	ft_putnbrs(num, &str[i]);
-	str[len] = '\0';
-	return (str);
+    i = 0;
+    while (i <= len)
+    {
+        str[i] = 0;
+        i++;
+    }
+}
+
+char	        *ft_itoa(int value, int base)
+{
+    int  len;
+    long num;
+    char *str;
+
+    num = value;
+    len = ft_get_len(value);
+    str = (char*)malloc(sizeof(char) * (len + 1));
+    ft_fill_str(str, len);
+    if (num < 0)
+    {
+        *str = '-';
+        num *= -1;
+    }
+    ft_convert(str + len - 1, num);
+    return (str);
 }
