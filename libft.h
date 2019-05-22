@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 16:37:25 by jwisozk           #+#    #+#             */
-/*   Updated: 2018/12/18 16:30:07 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/05/22 16:57:43 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,6 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef struct		s_assets
-{
-	size_t			i;
-	size_t			count;
-	size_t			start;
-	size_t			len;
-}					t_assets;
-void				ft_bzero2(void **s, size_t n);
-void				**ft_memalloc2(size_t size);
-void				**ft_memcpy2(void **dst, const void **src, size_t n);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 size_t				ft_strlen(char const *s);
@@ -95,6 +85,6 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 char				*ft_strrev(char *str);
 void				ft_lstadd_back(t_list **alst, t_list *new);
-void				ft_free_all(void **arr);
+void				**ft_free_all(void **ptr, int len);
 
 #endif

@@ -6,78 +6,71 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:00:11 by jwisozk           #+#    #+#             */
-/*   Updated: 2018/12/18 16:47:44 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/05/22 16:47:07 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static t_assets	ft_create_assets(void)
+static	int		ft_get_count_words(char const *s, char c)
 {
-	t_assets tmp;
+	int	count;
 
-	tmp.count = 1;
-	tmp.len = 0;
-	tmp.i = 0;
-	tmp.start = 0;
-	return (tmp);
-}
-
-static t_assets	ft_get_len_start(t_assets t, const char *s, char c)
-{
-	while (s[t.i] == c && s[t.i] != '\0')
-		t.i++;
-	t.start = t.i;
-	while (s[t.i] != c && s[t.i] != '\0')
-		t.i++;
-	t.len = t.i - t.start;
-	return (t);
-}
-
-static char		**ft_create_copy_ptr(char **s, char **t, size_t count)
-{
-	s = (char**)ft_memalloc2(count + 1);
-	if (!s)
-		return (NULL);
-	if (count > 1)
-		ft_memcpy2((void**)s, (const void**)t, count - 1);
-	return (s);
-}
-
-static char		**ft_check_return(char **str)
-{
-	if (str == NULL)
+	if (s == NULL)
+		return (0);
+	count = 0;
+	while (*s != '\0')
 	{
-		if (!(str = (char**)ft_memalloc2(1)))
-			return (NULL);
-		str[0] = NULL;
+		if (*s != c)
+		{
+			count++;
+			while (*s != c && *s != '\0')
+				s++;
+			continue ;
+		}
+		s++;
 	}
-	return (str);
+	return (count);
+}
+
+static	int		ft_get_len_word(char const *s, char c)
+{
+	int len;
+
+	len = 0;
+	while (*s != c && *s != '\0')
+	{
+		len++;
+		s++;
+	}
+	return (len);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char		**str;
-	char		**tmp;
-	t_assets	t;
+	char	**ptr;
+	int		count;
+	int		len;
+	int		i;
 
-	t = ft_create_assets();
-	str = NULL;
-	tmp = NULL;
-	while (s != NULL && s[t.i] != '\0')
+	count = ft_get_count_words(s, c);
+	if (!(ptr = (char**)malloc(sizeof(*ptr) * (count + 1))))
+		return (NULL);
+	ptr[count] = NULL;
+	i = 0;
+	while (s != NULL && i < count && *s != '\0')
 	{
-		t = ft_get_len_start(t, s, c);
-		if (t.len == 0)
-			break ;
-		if (!(str = ft_create_copy_ptr(str, tmp, t.count)) ||
-			!(str[t.count - 1] = ft_strsub(s, t.start, t.len)))
+		len = 1;
+		if (*s != c)
 		{
-			ft_free_all((void**)tmp);
-			return (NULL);
+			len = ft_get_len_word(s, c);
+			if (!(ptr[i] = (char*)malloc(sizeof(char) * (len + 1))))
+				return ((char**)ft_free_all((void**)ptr, i));
+			ptr[i] = ft_strncpy(ptr[i], s, len);
+			ptr[i][len] = '\0';
+			i++;
 		}
-		free(tmp);
-		tmp = str;
-		t.count++;
+		s += len;
 	}
-	return (ft_check_return(str));
+	return (ptr);
 }

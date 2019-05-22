@@ -39,8 +39,8 @@ SRC = ft_putchar.c		\
 	  ft_strrchr.c		\
 	  ft_strstr.c		\
 	  ft_strnstr.c		\
-	  ft_atoi.c			\
-	  ft_itoa.c			\
+	  ft_atoi.c		\
+	  ft_itoa.c		\
 	  ft_memset.c		\
 	  ft_bzero.c		\
 	  ft_memcpy.c		\
@@ -63,9 +63,6 @@ SRC = ft_putchar.c		\
 	  ft_strjoin.c		\
 	  ft_strtrim.c		\
 	  ft_strsplit.c		\
-	  ft_bzero2.c		\
-	  ft_memalloc2.c	\
-	  ft_memcpy2.c		\
 	  ft_lstnew.c		\
 	  ft_lstdelone.c	\
 	  ft_lstdel.c   	\
