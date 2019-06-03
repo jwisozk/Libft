@@ -6,7 +6,7 @@
 #    By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/29 14:38:14 by jwisozk           #+#    #+#              #
-#    Updated: 2018/12/18 16:32:23 by jwisozk          ###   ########.fr        #
+#    Updated: 2019/05/28 21:54:08 by jwisozk          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,8 @@ SRC = ft_putchar.c		\
 	  ft_strrchr.c		\
 	  ft_strstr.c		\
 	  ft_strnstr.c		\
-	  ft_atoi.c		\
-	  ft_itoa.c		\
+	  ft_atoi.c			\
+	  ft_itoa.c			\
 	  ft_memset.c		\
 	  ft_bzero.c		\
 	  ft_memcpy.c		\
@@ -71,7 +71,9 @@ SRC = ft_putchar.c		\
 	  ft_lstmap.c   	\
 	  ft_strrev.c   	\
 	  ft_lstadd_back.c	\
-	  ft_free_all.c
+	  ft_free_all.c		\
+	  ft_del.c          \
+	  get_next_line.c
 
 OBJ = $(SRC:.c=.o)
 FLAGS = -Wall -Wextra -Werror
